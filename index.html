@@ -1048,7 +1048,7 @@ body {
 <body>
     <!-- Music Player -->
     <audio id="bgMusic" loop>
-        <source src=music.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Control Button -->
@@ -1258,6 +1258,15 @@ body {
     var intervalContent;
     var intervalTitle;
     $("#btn__letter").on("click", function () {
+        // Play music on first click
+        if (!musicPlaying) {
+            bgMusic.play().then(() => {
+                musicPlaying = true;
+                musicBtn.style.display = 'flex';
+            }).catch((e) => {
+                musicBtn.style.display = 'flex';
+            });
+        }
         $(".box__letter").slideDown()
         setTimeout(function () {
             $(".letter__border").slideDown();
@@ -1321,17 +1330,9 @@ body {
     const musicBtn = document.getElementById('musicBtn');
     let musicPlaying = false;
 
-    // Play music when Click Here button is pressed
-    $("#btn__letter").on("click", function () {
-        if (!musicPlaying) {
-            bgMusic.play();
-            musicPlaying = true;
-            musicBtn.style.display = 'flex';
-        }
-    });
-
     // Toggle music on/off with the floating button
-    musicBtn.addEventListener('click', function () {
+    musicBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
         if (musicPlaying) {
             bgMusic.pause();
             musicPlaying = false;
