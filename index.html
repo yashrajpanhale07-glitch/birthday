@@ -1255,6 +1255,25 @@ body {
         }, 100)
     }, 12000)
 
+    // Music variables - defined here so they are available everywhere
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let musicPlaying = false;
+
+    // Toggle music button
+    musicBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (musicPlaying) {
+            bgMusic.pause();
+            musicPlaying = false;
+            musicBtn.innerHTML = '<i class="fa-solid fa-pause" style="color:white; font-size:1.2rem;"></i>';
+        } else {
+            bgMusic.play();
+            musicPlaying = true;
+            musicBtn.innerHTML = '<i class="fa-solid fa-music" style="color:white; font-size:1.2rem;"></i>';
+        }
+    });
+
     var intervalContent;
     var intervalTitle;
     $("#btn__letter").on("click", function () {
@@ -1324,25 +1343,6 @@ body {
     })
 
 
-
-    // Music logic
-    const bgMusic = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    let musicPlaying = false;
-
-    // Toggle music on/off with the floating button
-    musicBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (musicPlaying) {
-            bgMusic.pause();
-            musicPlaying = false;
-            musicBtn.innerHTML = '<i class="fa-solid fa-pause" style="color:white; font-size:1.2rem;"></i>';
-        } else {
-            bgMusic.play();
-            musicPlaying = true;
-            musicBtn.innerHTML = '<i class="fa-solid fa-music" style="color:white; font-size:1.2rem;"></i>';
-        }
-    });
 
     let mailBox = document.querySelector('.mail')
     let boxmail = document.querySelector('.boxMail')
